@@ -356,7 +356,7 @@ func (h *Host) resumeSnack(n *node) {
 		})
 	})
 	s.timer = Retain(MsgTimer(Class("NSTimer"), Sel("timerWithTimeInterval:repeats:block:"), s.left.Seconds(), false, ID(s.block)))
-	Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(s.timer), uintptr(String("kCFRunLoopCommonModes")))
+	Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(s.timer), uintptr(commonModes()))
 }
 
 func (h *Host) stopSnackTimer(n *node) {

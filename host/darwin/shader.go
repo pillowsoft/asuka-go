@@ -239,12 +239,12 @@ func (h *Host) updateShaderClock() {
 	// a timer at 60 Hz.
 	if RespondsTo(h.content, "displayLinkWithTarget:selector:") {
 		t := Retain(Send(h.content, "displayLinkWithTarget:selector:", uintptr(h.target), uintptr(Sel("shaderTick:"))))
-		Send(t, "addToRunLoop:forMode:", uintptr(Send(Class("NSRunLoop"), "mainRunLoop")), uintptr(String("kCFRunLoopCommonModes")))
+		Send(t, "addToRunLoop:forMode:", uintptr(Send(Class("NSRunLoop"), "mainRunLoop")), uintptr(commonModes()))
 		h.shaderTimer = t
 		return
 	}
 	t := Retain(MsgTargetTimer(Class("NSTimer"), Sel("timerWithTimeInterval:target:selector:userInfo:repeats:"), 1.0/60, h.target, Sel("shaderTick:"), 0, true))
-	Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(t), uintptr(String("kCFRunLoopCommonModes")))
+	Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(t), uintptr(commonModes()))
 	h.shaderTimer = t
 }
 

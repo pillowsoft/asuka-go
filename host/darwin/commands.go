@@ -411,12 +411,12 @@ func (h *Host) setFrames(on bool) {
 	// timer at 60 Hz.
 	if RespondsTo(h.content, "displayLinkWithTarget:selector:") {
 		f.timer = Retain(Send(h.content, "displayLinkWithTarget:selector:", uintptr(h.target), uintptr(Sel("frameTick:"))))
-		Send(f.timer, "addToRunLoop:forMode:", uintptr(Send(Class("NSRunLoop"), "mainRunLoop")), uintptr(String("kCFRunLoopCommonModes")))
+		Send(f.timer, "addToRunLoop:forMode:", uintptr(Send(Class("NSRunLoop"), "mainRunLoop")), uintptr(commonModes()))
 	} else {
 		f.timer = Retain(Send(Send(Class("NSTimer"), "alloc"), "initWithFireDate:interval:target:selector:userInfo:repeats:",
 			uintptr(Send(Class("NSDate"), "date")), 0, uintptr(h.target), uintptr(Sel("frameTick:")), 0, 1))
 		MsgSetFloat(f.timer, Sel("setTolerance:"), 0)
-		Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(f.timer), uintptr(String("kCFRunLoopCommonModes")))
+		Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(f.timer), uintptr(commonModes()))
 	}
 	h.frames = f
 }

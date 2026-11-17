@@ -139,7 +139,7 @@ func setDockProgress(state byte, value float64) {
 			p.started = time.Now()
 			p.timerBlock = NewBlock(func(_ objc.Block, _ ID) { layoutDockBar(); Send(dockTile(), "display") })
 			p.timer = Retain(MsgTimer(Class("NSTimer"), Sel("timerWithTimeInterval:repeats:block:"), 1.0/15, true, ID(p.timerBlock)))
-			Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(p.timer), uintptr(String("kCFRunLoopCommonModes")))
+			Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(p.timer), uintptr(commonModes()))
 		}
 	} else {
 		stopDockTimer()

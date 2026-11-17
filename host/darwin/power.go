@@ -109,8 +109,7 @@ func watchPowerSources(f func()) {
 	if src == 0 {
 		return
 	}
-	mode := Const(CoreFoundation(), "kCFRunLoopCommonModes")
-	p.addSource(p.mainLoop(), src, uintptr(mode))
+	p.addSource(p.mainLoop(), src, uintptr(commonModes()))
 }
 
 // readPower is the state: u8 battery, u8 on battery, u8 level (255: not

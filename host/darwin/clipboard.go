@@ -235,7 +235,7 @@ func (h *Host) clipboardModule() map[string]method {
 			c.waiting = append(c.waiting, reply)
 			if c.timer == 0 {
 				t := Retain(MsgTargetTimer(Class("NSTimer"), Sel("timerWithTimeInterval:target:selector:userInfo:repeats:"), 0.5, h.target, Sel("clipboardTick:"), 0, true))
-				Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(t), uintptr(String("kCFRunLoopCommonModes")))
+				Send(Send(Class("NSRunLoop"), "mainRunLoop"), "addTimer:forMode:", uintptr(t), uintptr(commonModes()))
 				c.timer = t
 			}
 		},
