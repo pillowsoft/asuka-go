@@ -1,6 +1,15 @@
 <img src="artwork/icons/atfield.svg" width="96" alt="">
 
-# Asuka
+# Asuka (Go)
+
+> [!NOTE]
+> **This is asuka-go, a fork of [egoist/asuka](https://github.com/egoist/asuka)
+> at v0.1.1, the last release where apps are written in Go.** From v0.2.0,
+> upstream Asuka is a language of its own with a core in C, and its Go API
+> is gone. This fork keeps the Go version working; its default branch is
+> `go`. The `main` branch and the v0.2 tags here are upstream's, unchanged.
+> The module path is still `github.com/egoist/asuka`, so use it with a
+> `replace` directive.
 
 Apps in Go with each platform's own widgets, on iOS, Android, macOS,
 Windows, Linux and the web.
